@@ -1,0 +1,71 @@
+#
+# overall makefile
+#
+
+TOPDIR=.
+include common-gnu.mak
+
+# make ignores targets if they match directory names
+all: Bserver Bclient Bmodules Bcompiler Bdiff Bkod Bdeco Bmakebgf Bsprocket Butil Bupdater Bbbgun Bkeybind
+Bserver: Bsprocket
+	echo Making in $(BLAKSERVDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(BLAKSERVDIR)
+
+Bclient: Butil
+	echo Making in $(CLIENTDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(CLIENTDIR)
+
+Bmodules: Bclient
+	echo Making in $(MODULEDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(MODULEDIR)
+
+Bcompiler:
+	echo Making $(COMMAND) in $(BLAKCOMPDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(BLAKCOMPDIR)
+
+Bdiff:
+	echo Making $(COMMAND) in $(DIFFDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(DIFFDIR)
+
+Bkod: Bdiff
+	echo Making $(COMMAND) in $(KODDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(KODDIR)
+
+Bdeco:
+	echo Making $(COMMAND) in $(DECODIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(DECODIR)
+
+Bresource: makebgf
+	echo Making $(COMMAND) in $(RESOURCEDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(RESOURCEDIR)
+
+Bmakebgf:
+	echo Making $(COMMAND) in $(MAKEBGFDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(MAKEBGFDIR)
+	cd ..
+
+Butil:
+	echo Making $(COMMAND) in $(UTILDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(UTILDIR)
+	cd ..
+
+Bsprocket:
+	echo Making $(COMMAND) in $(SPROCKETDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(SPROCKETDIR) -f Makefile.linux
+	cd ..
+
+Bupdater:
+	echo Making $(COMMAND) in $(CLUBDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(CLUBDIR)
+
+Bbbgun:
+	echo Making $(COMMAND) in $(BBGUNDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(BBGUNDIR)
+
+Bkeybind:
+	echo Making $(COMMAND) in $(KEYBINDDIR)
+	$(MAKE) $(MAKEFLAGS) $(COMMAND) -C $(KEYBINDDIR)
+
+clean:
+	set COMMAND=clean
+	$(MAKE) $(MAKEFLAGS)

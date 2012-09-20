@@ -1,0 +1,30 @@
+#
+# makefile for blakserv protocol dll sprocket
+#
+
+TOPDIR=..
+
+DLL = 1
+
+include $(TOPDIR)/common-gnu.mak
+
+CFLAGS += -I$(TOPDIR)/include -I$(BLAKSERVDIR)
+
+CFLAGS += -LD
+
+SOURCEDIR = .
+
+LIBS =
+
+OBJS =  \
+	$(OUTDIR)/sprocket.o \
+
+
+all : makedirs $(OUTDIR)/sprocket.dll
+$(OUTDIR)/sprocket.o: $(SOURCEDIR)/sprocket.c
+
+$(OUTDIR)/sprocket.dll: $(OBJS)
+	$(LINK) $** -OUT:$@ -subsystem:windows  $(LINKFLAGS) -def:sprocket.def
+	$(CP) $@ $(BLAKSERVRUNDIR)\loadkod
+
+include $(TOPDIR)/rules-gnu.mak

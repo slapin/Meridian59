@@ -118,6 +118,7 @@ enum
 #define SPROCKET_FILE "sprocket.dll"
 
 
+#if 0
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <winsock2.h>
@@ -127,15 +128,20 @@ enum
 #include <richedit.h>
 #include "resource.h"
 #include <crtdbg.h>
+#endif
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <malloc.h>
+#if 0
 #include <process.h>
+#endif
 #include <fcntl.h>
-#include <sys\types.h>
-#include <sys\stat.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#if 0
 #include <io.h>
+#endif
 #include <time.h>
 #include <math.h>
 

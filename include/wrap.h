@@ -10,9 +10,17 @@
 #ifndef _WRAP_H_
 #define _WRAP_H_
 
+#if 0
 #include <windows.h>
+#endif
 
+#if 0
 #define WRAPAPI WINAPI
+#else
+#define WRAPAPI
+#define WINAPI
+#endif
+typedef int bool;
 
 // Call this before any other function.
 void WRAPAPI WrapInit();
